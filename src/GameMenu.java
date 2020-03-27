@@ -10,6 +10,7 @@ public class GameMenu {
      public static boolean isThereAKillInThisTurn;
      private static String moveSaver;
      private static String moveSubmission;
+     public static ArrayList<String> allMoves;
 
 
      public GameMenu(Participator participator, Participator participator2) {
@@ -19,7 +20,7 @@ public class GameMenu {
           Table table = new Table(players1,player2);
           table.makeTable();
           moveSaver = new String();
-          Players.allmoves = new ArrayList<>();
+          allMoves = new ArrayList<>();
      }
      public static boolean select(int x , int y){
           if (x>8||y>8||x<1||y<1){
@@ -106,6 +107,7 @@ public class GameMenu {
                          if (pieceTypeChoose(x,y,piece,move)){
                               isThereAMoveInThisTurn = true;
                               players1.getMovments().add(move.toString());
+                             // allMoves.add(move.toString());
                               moveSubmission = move.toString();
                               return true;
                          }
@@ -120,6 +122,7 @@ public class GameMenu {
                          if (pieceTypeChoose(x,y,piece,move)){
                               isThereAMoveInThisTurn=true;
                               player2.getMovments().add(move.toString());
+                            //  allMoves.add(move.toString());
                               moveSubmission = move.toString();
                               return true;
                          }
@@ -190,22 +193,24 @@ public class GameMenu {
                }
                player2.setUndo(player2.getUndo()-1);
               player2.getMovments().remove(moveSubmission);
+              allMoves.remove(moveSubmission);
           }
           else {
-                    if (players1.getUndo()==0){
-                         System.out.println("you cannot undo anymore");
-                         return false;
-                    }
-               if (!isThereAMoveInThisTurn){
+               if (players1.getUndo() == 0) {
+                    System.out.println("you cannot undo anymore");
+                    return false;
+               }
+               if (!isThereAMoveInThisTurn) {
                     System.out.println("you must move before undo");
                     return false;
                }
-               if (isThereAUndoInThisTurn){
+               if (isThereAUndoInThisTurn) {
                     System.out.println("you have used your undo for this turn");
                     return false;
                }
-               players1.setUndo(players1.getUndo()-1);
-            //   players1.getMovments().remove(move.toString());
+               players1.setUndo(players1.getUndo() - 1);
+               players1.getMovments().remove(moveSubmission);
+               allMoves.remove(moveSubmission);
           }
           System.out.println("undo completed");
           String[] moveSaverSplits = moveSaver.split(":");
@@ -253,12 +258,18 @@ public class GameMenu {
           }
      }
      public static boolean showMoveAll(){
-          for (String s : Players.allmoves) {
-               System.out.println(s);
+          for (String move : allMoves) {
+               System.out.println(move);
           }
           return true;
      }
      public static boolean showKilledPieceOfThisPlayer(){
+          if (turn%2==0){
+
+          }
+          else {
+
+          }
           return true;
      }
      public static boolean showKilledAll(){

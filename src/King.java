@@ -8,7 +8,7 @@ public class King extends Pieces{
        if (Math.abs(x-position1)==1 && y==position2){
            if (Table.isInThisHomeAnyPiece(position1, position2)==null){
                move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-               Players.allmoves.add(move.toString());
+               GameMenu.allMoves.add(move.toString());
                x=position1;
                y=position2;
                System.out.println("moved");
@@ -27,7 +27,7 @@ public class King extends Pieces{
        if (Math.abs(y-position2)==1 && x == position1){
            if (Table.isInThisHomeAnyPiece(position1, position2)==null){
                move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-               Players.allmoves.add(move.toString());
+               GameMenu.allMoves.add(move.toString());
                x=position1;
                y=position2;
                System.out.println("moved");

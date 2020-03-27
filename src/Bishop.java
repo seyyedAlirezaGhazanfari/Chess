@@ -25,7 +25,7 @@ public class Bishop extends Pieces {
             }
             if (numberOfDisBlankHomes==0 && Table.isInThisHomeAnyPiece(position1,position1)==null){
                 move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-                Players.allmoves.add(move.toString());
+                GameMenu.allMoves.add(move.toString());
                 x = position1;
                  y = position2;
                 System.out.println("moved");

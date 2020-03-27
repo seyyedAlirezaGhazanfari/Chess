@@ -55,8 +55,8 @@ public class Pieces {
                 else {
                     piece.pieceFormatView = PieceFormatView.NOW;
                     piece.pieceAttention = PieceAttention.KILLED;
-                    move.append(" "+String.valueOf(piece.x)+","+String.valueOf(piece.y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)+" destroyed "+piece.nickName);
-                    Players.allmoves.add(move.toString());
+                    move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)+" destroyed "+piece.nickName);
+                   GameMenu.allMoves.add(move.toString());
                     x=position1;
                     y = position2;
                     System.out.println("rival piece destroyed");
@@ -75,7 +75,7 @@ public class Pieces {
         return null;
     }
     protected boolean undo(int position1 , int position2){
-        for (String s : Players.allmoves) {
+        for (String s : GameMenu.allMoves) {
             if (s.equals(nickName+" "+String.valueOf(position1)+","+String.valueOf(position2)+" to "+String.valueOf(x)+","+String.valueOf(y))){
                 allPieces.remove(s);
                 break;

@@ -21,7 +21,7 @@ public class Rook extends Pieces {
          }
          if (numberOfUnBlankHomesInWay==0 && Table.isInThisHomeAnyPiece(position1, position2)==null){
              move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-             Players.allmoves.add(move.toString());
+             GameMenu.allMoves.add(move.toString());
              y  = position2;
              System.out.println("moved");
              return true;
@@ -58,7 +58,7 @@ public class Rook extends Pieces {
          }
          if (numberOfUnBlankHomesInWay==0 && Table.isInThisHomeAnyPiece(position1, position2)==null){
              move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-             Players.allmoves.add(move.toString());
+             GameMenu.allMoves.add(move.toString());
              x = position1;
              System.out.println("moved");
              return true;

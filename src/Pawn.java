@@ -19,7 +19,7 @@ public class Pawn extends Pieces{
                     if (Table.isInThisHomeAnyPiece(x,position2) == null){
                         if (Table.isInThisHomeAnyPiece(x,position2-1)==null){
                             move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-                           Players.allmoves.add(move.toString());
+                           GameMenu.allMoves.add(move.toString());
                             y= position2;
                             System.out.println("moved");
                             turn+=1;
@@ -42,7 +42,7 @@ public class Pawn extends Pieces{
             if (x==position1 && position2 - y == 1){
                 if (Table.isInThisHomeAnyPiece(x,position2)==null){
                     move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-                    Players.allmoves.add(move.toString());
+                    GameMenu.allMoves.add(move.toString());
                     y= position2;
                     System.out.println("moved");
                     turn+=1;
@@ -65,7 +65,7 @@ public class Pawn extends Pieces{
                     if (Table.isInThisHomeAnyPiece(x,position2)==null){
                         if (Table.isInThisHomeAnyPiece(x,position2+1)==null){
                             move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-                            Players.allmoves.add(move.toString());
+                            GameMenu.allMoves.add(move.toString());
                             y = position2;
                             System.out.println("moved");
                             turn+=1;
@@ -88,7 +88,7 @@ public class Pawn extends Pieces{
             if (x == position1 && y - position2 == 1){
                 if (Table.isInThisHomeAnyPiece(x,position2)==null){
                     move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
-                    Players.allmoves.add(move.toString());
+                   GameMenu.allMoves.add(move.toString());
                     y= position2;
                     System.out.println("moved");
                     turn+=1;

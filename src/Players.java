@@ -9,7 +9,6 @@ public class Players {
     private int undo;
     private ArrayList<String> movments;
     private ArrayList<Pieces> allPieces;
-    public static ArrayList<String > allmoves;
     public Players(Participator participator, boolean isItWhite, int turn) {
         this.participator = participator;
         this.isItWhite = isItWhite;
