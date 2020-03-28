@@ -25,25 +25,16 @@ public class Pieces {
         this.nickName = nickName;
         turn=1;
     }
-
-
     public void setX(int x) {
         this.x = x;
     }
-
-
     public void setY(int y) {
         this.y = y;
     }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    protected boolean move(int position1 , int position2,StringBuilder move){
+    protected boolean move(int position1 , int position2,StringBuilder move,StringBuilder killSentence){
         return true;
     }
-    protected boolean kill(int position1 , int position2,StringBuilder move){
+    protected boolean kill(int position1 , int position2,StringBuilder move,StringBuilder killSentence){
         if (Table.isInThisHomeAnyPiece(position1,position2)==null){
             return false;
         }
@@ -54,10 +45,12 @@ public class Pieces {
                 }
                 else {
                     if (piece.isPeiceWhite){
-                        Players.allKilledPiecesNickNamesOfPlayerWhite.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                        killSentence.append(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                        Players.allKilledPiecesNickNamesOfPlayerWhite.add(killSentence.toString());
                     }
                     else {
-                        Players.allKilledPiecesNickNamesOfPlayerBlack.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                        killSentence.append(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                        Players.allKilledPiecesNickNamesOfPlayerBlack.add(killSentence.toString());
                     }
                     Players.allKilledPerson.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
                     piece.pieceFormatView = PieceFormatView.NOW;
@@ -73,13 +66,6 @@ public class Pieces {
             }
         }
         return false;
-    }
-    public static Pieces findPiecesByPosition(int x , int y){
-        for (Pieces piece : allPieces) {
-            if (piece.x==x && piece.y==y)
-                return piece;
-        }
-        return null;
     }
     protected boolean undo(int position1 , int position2){
         for (String s : GameMenu.allMoves) {

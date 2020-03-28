@@ -4,11 +4,11 @@ public class Pawn extends Pieces{
     }
 
     @Override
-    protected boolean move(int position1, int position2,StringBuilder move) {
+    protected boolean move(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
         if (isPeiceWhite){
             if (turn == 1) {
                 if (Math.abs(position1-x)==1 && position2-y==1){
-                    if(kill(position1,position2,move)){
+                    if(kill(position1,position2,move,killSentence)){
                         turn+=1;
                         return true;
                     }
@@ -33,7 +33,7 @@ public class Pawn extends Pieces{
                 }
             }
             if (Math.abs(position1-x)==1 && position2-y==1){
-                if (kill(position1,position2,move)){
+                if (kill(position1,position2,move,killSentence)){
                     turn+=1;
                     return true;
                 }
@@ -55,7 +55,7 @@ public class Pawn extends Pieces{
         else {
             if (turn == 1){
                 if (Math.abs(position1-x) ==1 && y - position2 == 1){
-                    if (kill(position1,position2,move)){
+                    if (kill(position1,position2,move,killSentence)){
                         turn+=1;
                         return true;
                     }
@@ -79,7 +79,7 @@ public class Pawn extends Pieces{
                 }
             }
             if (Math.abs(x-position1)==1 && y - position2 == 1){
-                if (kill(position1,position2,move)){
+                if (kill(position1,position2,move,killSentence)){
                     turn+=1;
                     return true;
                 }
@@ -102,8 +102,8 @@ public class Pawn extends Pieces{
     }
 
     @Override
-    protected boolean kill(int position1, int position2,StringBuilder move) {
-       if (super.kill(position1,position2,move))
+    protected boolean kill(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
+       if (super.kill(position1,position2,move,killSentence))
            return true;
        return false;
     }

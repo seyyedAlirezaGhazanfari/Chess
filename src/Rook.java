@@ -4,7 +4,7 @@ public class Rook extends Pieces {
     }
 
     @Override
-    protected boolean move(int position1, int position2,StringBuilder move) {
+    protected boolean move(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
      if (position1==x && Math.abs(position2-y)>0){
          int j = y;
          int numberOfUnBlankHomesInWay =0 ;
@@ -32,7 +32,7 @@ public class Rook extends Pieces {
                  return false;
              }
              else {
-                 if (kill(position1, position2,move))
+                 if (kill(position1, position2,move,killSentence))
                      return true;
                  return false;
              }
@@ -69,7 +69,7 @@ public class Rook extends Pieces {
                  return false;
              }
              else {
-                 if (kill(position1, position2,move))
+                 if (kill(position1, position2,move,killSentence))
                      return true;
                  return false;
              }
@@ -83,8 +83,8 @@ public class Rook extends Pieces {
     }
 
     @Override
-    protected boolean kill(int position1, int position2,StringBuilder move) {
-return super.kill(position1, position2,move);
+    protected boolean kill(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
+return super.kill(position1, position2,move,killSentence);
     }
 
     @Override

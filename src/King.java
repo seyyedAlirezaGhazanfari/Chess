@@ -4,7 +4,7 @@ public class King extends Pieces{
     }
 
     @Override
-    protected boolean move(int position1, int position2,StringBuilder move) {
+    protected boolean move(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
        if (Math.abs(x-position1)==1 && y==position2){
            if (Table.isInThisHomeAnyPiece(position1, position2)==null){
                move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)) ;
@@ -19,7 +19,7 @@ public class King extends Pieces{
                return false;
            }
            else {
-               if (kill(position1, position2,move))
+               if (kill(position1, position2,move,killSentence))
                    return true;
                return false;
            }
@@ -38,7 +38,7 @@ public class King extends Pieces{
                return false;
            }
            else {
-               if (kill(position1, position2,move))
+               if (kill(position1, position2,move,killSentence))
                    return true;
                return false;
            }
@@ -47,8 +47,8 @@ public class King extends Pieces{
     }
 
     @Override
-    protected boolean kill(int position1, int position2,StringBuilder move) {
-        return super.kill(position1, position2,move);
+    protected boolean kill(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
+        return super.kill(position1, position2,move,killSentence);
     }
 
     @Override

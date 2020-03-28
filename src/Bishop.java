@@ -4,7 +4,7 @@ public class Bishop extends Pieces {
     }
 
     @Override
-    protected boolean move(int position1, int position2,StringBuilder move) {
+    protected boolean move(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
         if (Math.abs(x-position1)==Math.abs(y - position2)){
             int i = x;
             int j = y;
@@ -41,7 +41,7 @@ public class Bishop extends Pieces {
                     return false;
                 }
                 else {
-                    if (kill(position1, position2,move)){
+                    if (kill(position1, position2,move,killSentence)){
                         return true;
                     }
                     return false;
@@ -52,8 +52,8 @@ public class Bishop extends Pieces {
     }
 
     @Override
-    protected boolean kill(int position1, int position2,StringBuilder move) {
-        return super.kill(position1,position2,move);
+    protected boolean kill(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
+        return super.kill(position1,position2,move,killSentence);
     }
 
     @Override

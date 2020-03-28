@@ -11,6 +11,7 @@ public class GameMenu {
      private static String moveSaver;
      private static String moveSubmission;
      public static ArrayList<String> allMoves;
+     private static StringBuilder killSentence;
 
 
      public GameMenu(Participator participator, Participator participator2) {
@@ -92,6 +93,7 @@ public class GameMenu {
      }
      public static boolean move(int x , int y){
           StringBuilder move = new StringBuilder();
+          killSentence = new StringBuilder();
           moveSaver = new String();
           moveSaver = moveSaver + String.valueOf(x) + ":"+String.valueOf(y)+":";
           if (isThereAMoveInThisTurn==true){
@@ -106,7 +108,7 @@ public class GameMenu {
                for (Pieces piece : players1.getAllPieces()) {
                     if (piece.peiceForm.equals(PeiceForm.SELECTED)){
                          moveSaver +=String.valueOf(piece.x)+":"+String.valueOf(piece.y);
-                         if (pieceTypeChoose(x,y,piece,move)){
+                         if (pieceTypeChoose(x,y,piece,move,killSentence)){
                               isThereAMoveInThisTurn = true;
                               players1.getMovments().add(move.toString());
                              // allMoves.add(move.toString());
@@ -121,7 +123,7 @@ public class GameMenu {
                for (Pieces piece : player2.getAllPieces()) {
                     if (piece.peiceForm.equals(PeiceForm.SELECTED)){
                          moveSaver +=String.valueOf(piece.x)+":"+String.valueOf(piece.y);
-                         if (pieceTypeChoose(x,y,piece,move)){
+                         if (pieceTypeChoose(x,y,piece,move,killSentence)){
                               isThereAMoveInThisTurn=true;
                               player2.getMovments().add(move.toString());
                             //  allMoves.add(move.toString());
@@ -195,7 +197,9 @@ public class GameMenu {
                }
                player2.setUndo(player2.getUndo()-1);
               player2.getMovments().remove(moveSubmission);
+             // Players.allKilledPiecesNickNamesOfPlayerWhite.remove()
               allMoves.remove(moveSubmission);
+              Players.allKilledPiecesNickNamesOfPlayerWhite.remove(killSentence.toString());
           }
           else {
                if (players1.getUndo() == 0) {
@@ -213,10 +217,12 @@ public class GameMenu {
                players1.setUndo(players1.getUndo() - 1);
                players1.getMovments().remove(moveSubmission);
                allMoves.remove(moveSubmission);
+               Players.allKilledPiecesNickNamesOfPlayerBlack.remove(killSentence.toString());
           }
           System.out.println("undo completed");
           String[] moveSaverSplits = moveSaver.split(":");
           undoProcess(Integer.parseInt(moveSaverSplits[2]),Integer.parseInt(moveSaverSplits[3]),showSelected());
+          Players.allKilledPerson.remove(killSentence.toString());
           isThereAUndoInThisTurn=true;
           isThereAMoveInThisTurn=false;
           return true;
@@ -286,7 +292,7 @@ public class GameMenu {
           }
           return true;
      }
-     public static void help(){
+     public static void help() {
          System.out.println("select [x],[y]\ndeselect\nmove [x],[y]\nnext_turn\nshow_turn\nundo\nundo_number\nshow_moves [-all]\nshow_killed [-all]\nshow_board\nhelp\nforfeit");
      }
      public static void disSelectAllPieces(Players player){
@@ -296,33 +302,33 @@ public class GameMenu {
                }
           }
      }
-     public static boolean pieceTypeChoose(int x, int y, Pieces piece,StringBuilder move) {
+     public static boolean pieceTypeChoose(int x, int y, Pieces piece,StringBuilder move,StringBuilder killSentence) {
           if (piece.peiceForm.equals(PeiceForm.SELECTED)){
                switch (piece.type){
                     case "Pawn":
                          Pawn pawn = (Pawn) piece;
                          move.append(pawn.nickName);
-                       return   pawn.move(x,y,move);
+                       return   pawn.move(x,y,move,killSentence);
                     case "Rook":
                          Rook rook = (Rook) piece;
                          move.append(rook.nickName);
-                       return   rook.move(x,y,move);
+                       return   rook.move(x,y,move,killSentence);
                     case "Queen":
                          Queen queen = (Queen) piece;
                          move.append(queen.nickName);
-                       return   queen.move(x,y,move);
+                       return   queen.move(x,y,move,killSentence);
                     case "King":
                          King king = (King) piece;
                          move.append(king.nickName);
-                       return   king.move(x,y,move);
+                       return   king.move(x,y,move,killSentence);
                     case "Knight":
                          Knight knight = (Knight) piece;
                          move.append(knight.nickName);
-                      return    knight.move(x,y,move);
+                      return    knight.move(x,y,move,killSentence);
                     case "Bishop":
                          Bishop bishop = (Bishop) piece;
                          move.append(bishop.nickName);
-                        return bishop.move(x,y,move);
+                        return bishop.move(x,y,move,killSentence);
                }
           }
           return false;

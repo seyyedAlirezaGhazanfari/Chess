@@ -4,14 +4,14 @@ public class Knight extends Pieces {
     }
 
     @Override
-    protected boolean move(int position1, int position2,StringBuilder move) {
+    protected boolean move(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
         if (Math.abs(position1-x)==2 && Math.abs(position2-y)==1){
             if ( Table.isInThisHomeAnyPiece(position1, position2)!=null){
                 if (isPeiceWhite==Table.isInThisHomeAnyPiece(position1, position2).isPeiceWhite){
                     System.out.println("cannot move to the spot");
                     return false;
                 }
-                if (kill(position1,position2,move))
+                if (kill(position1,position2,move,killSentence))
                     return true;
                 return false;
             }
@@ -30,7 +30,7 @@ public class Knight extends Pieces {
                     System.out.println("cannot move to the spot");
                     return false;
                 }
-                if (kill(position1,position2,move))
+                if (kill(position1,position2,move,killSentence))
                     return true;
                 return false;
             }
@@ -47,8 +47,8 @@ public class Knight extends Pieces {
     }
 
     @Override
-    protected boolean kill(int position1, int position2,StringBuilder move) {
-        return super.kill(position1, position2,move);
+    protected boolean kill(int position1, int position2,StringBuilder move,StringBuilder killSentence) {
+        return super.kill(position1, position2,move,killSentence);
     }
 
     @Override
