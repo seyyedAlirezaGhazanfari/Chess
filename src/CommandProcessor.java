@@ -112,6 +112,12 @@ public class CommandProcessor {
             if (command.equals("show_moves-all")){
                 GameMenu.showMoveAll();
             }
+            if (command.equals("show_killed")){
+                GameMenu.showKilledPieceOfThisPlayer();
+            }
+            if (command.equals("show_killed-all")){
+                GameMenu.showKilledAll();
+            }
         }
     }
     public static boolean checkUsernameAndPasswordFormat(String[] commandSplits) {

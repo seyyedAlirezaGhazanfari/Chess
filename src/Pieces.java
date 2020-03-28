@@ -53,6 +53,13 @@ public class Pieces {
                     return false;
                 }
                 else {
+                    if (piece.isPeiceWhite){
+                        Players.allKilledPiecesNickNamesOfPlayerWhite.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                    }
+                    else {
+                        Players.allKilledPiecesNickNamesOfPlayerBlack.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
+                    }
+                    Players.allKilledPerson.add(piece.nickName+" killed in spot "+String.valueOf(piece.x)+","+String.valueOf(piece.y));
                     piece.pieceFormatView = PieceFormatView.NOW;
                     piece.pieceAttention = PieceAttention.KILLED;
                     move.append(" "+String.valueOf(x)+","+String.valueOf(y)+" to "+String.valueOf(position1)+","+String.valueOf(position2)+" destroyed "+piece.nickName);

@@ -1,6 +1,6 @@
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
+//removing killed pieces from killed piece of special player list by undo
 public class GameMenu {
      private static Players players1;
      private static Players player2;
@@ -21,6 +21,8 @@ public class GameMenu {
           table.makeTable();
           moveSaver = new String();
           allMoves = new ArrayList<>();
+          Players.allKilledPiecesNickNamesOfPlayerBlack = new ArrayList<>();
+          Players.allKilledPiecesNickNamesOfPlayerWhite = new ArrayList<>();
      }
      public static boolean select(int x , int y){
           if (x>8||y>8||x<1||y<1){
@@ -265,14 +267,23 @@ public class GameMenu {
      }
      public static boolean showKilledPieceOfThisPlayer(){
           if (turn%2==0){
-
+               for (String s : Players.allKilledPiecesNickNamesOfPlayerBlack) {
+                    System.out.println(s);
+               }
+               return true;
           }
           else {
+               for (String s : Players.allKilledPiecesNickNamesOfPlayerWhite) {
+                    System.out.println(s);
+               }
+               return true;
 
           }
-          return true;
      }
      public static boolean showKilledAll(){
+          for (String person : Players.allKilledPerson) {
+               System.out.println(person);
+          }
           return true;
      }
      public static void help(){
