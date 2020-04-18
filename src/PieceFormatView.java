@@ -1,3 +1,3 @@
 public enum PieceFormatView {
-    NOW , PAST , FUTURE;
+    NOW, PAST, FUTURE
 }

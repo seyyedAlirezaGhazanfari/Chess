@@ -5,9 +5,11 @@ public class OriginalMenu {
     }
 
     public static boolean logout(Participator participator) {
-        if (participator.attention == true) {
+        if (participator.attention = true) {
             participator.attention = false;
+            System.out.println("logout successful");
             return true;
+
         }
         return false;
     }

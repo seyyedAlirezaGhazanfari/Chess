@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
-class PlayerInfo{
+
+class PlayerInfo {
     private int winNumber;
     private int loseNumber;
     private int equalNumber;
@@ -45,48 +46,25 @@ class PlayerInfo{
         this.score = score;
     }
 }
+
 public class Participator {
     private PlayerInfo playerInfo;
     public boolean attention;
+
     private static ArrayList<Participator> participators = new ArrayList<>();
     private String username;
     private String password;
-    private String color;
-    private boolean iHadAMoveInThisTurn;
-    private int remainigAmountOfUndo;
+
     public Participator(String username, String password) {
         this.username = username;
         this.password = password;
         participators.add(this);
         attention = false;
-        playerInfo = new PlayerInfo(0,0,0,0);
-        color = "Y";
-        iHadAMoveInThisTurn = false;
-        remainigAmountOfUndo = 2;
+        playerInfo = new PlayerInfo(0, 0, 0, 0);
     }
 
-    public int getRemainigAmountOfUndo() {
-        return remainigAmountOfUndo;
-    }
-
-    public void setRemainigAmountOfUndo(int remainigAmountOfUndo) {
-        this.remainigAmountOfUndo = remainigAmountOfUndo;
-    }
-
-    public boolean isiHadAMoveInThisTurn() {
-        return iHadAMoveInThisTurn;
-    }
-
-    public void setiHadAMoveInThisTurn(boolean iHadAMoveInThisTurn) {
-        this.iHadAMoveInThisTurn = iHadAMoveInThisTurn;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
+    public PlayerInfo getPlayerInfo() {
+        return playerInfo;
     }
 
     public String getUsername() {
@@ -106,17 +84,18 @@ public class Participator {
         }
         return usernames;
     }
-    public static int[] extractWin(ArrayList<Participator> participators,int id){
+
+    public static int[] extractWin(ArrayList<Participator> participators, int id) {
         int[] wins = new int[participators.size()];
-        int i=0;
+        int i = 0;
         for (Participator participator : participators) {
-            if (id==1)
-            wins[i] = participator.playerInfo.getWinNumber();
-            if (id==2)
-              wins[i] = participator.playerInfo.getEqualNumber();
-            if (id==3)
+            if (id == 1)
+                wins[i] = participator.playerInfo.getWinNumber();
+            if (id == 2)
+                wins[i] = participator.playerInfo.getEqualNumber();
+            if (id == 3)
                 wins[i] = participator.playerInfo.getLoseNumber();
-            if (id==4)
+            if (id == 4)
                 wins[i] = participator.playerInfo.getScore();
             i++;
         }
@@ -163,22 +142,30 @@ public class Participator {
         }
         return null;
     }
-    public static void arrangement(String[] usernames,int[] win , int[] lose,int[] equal,int[] score){
-        for (int i =0;i<participators.size();i++){
-            for (int k=0;k<participators.size()-1;k++){
-                if (score[k]<score[k+1]){
+
+    public static void arrangement(String[] usernames, int[] win, int[] lose, int[] equal, int[] score) {
+        for (int i = 0; i < participators.size(); i++) {
+            for (int k = 0; k < participators.size() - 1; k++) {
+                if (score[k] < score[k + 1]) {
                     transfering(usernames, win, lose, equal, score, k);
                 }
-                if (score[k]==score[k+1]){
-                    if (win[k]<win[k+1]){
-                        transfering(usernames,win,lose,equal,score,k);
+                if (score[k] == score[k + 1]) {
+                    if (win[k] < win[k + 1]) {
+                        transfering(usernames, win, lose, equal, score, k);
                     }
-                    if (win[k]==win[k+1]){
-                        if (equal[k]<equal[k+1])
-                            transfering(usernames,win,lose,equal,score,k);
-                        if (equal[k] == equal[k+1]){
-                            if (lose[k]>lose[k+1]){
-                                transfering(usernames,win,lose,equal,score,k);
+                    if (win[k] == win[k + 1]) {
+                        if (equal[k] < equal[k + 1])
+                            transfering(usernames, win, lose, equal, score, k);
+                        if (equal[k] == equal[k + 1]) {
+                            if (lose[k] > lose[k + 1]) {
+                                transfering(usernames, win, lose, equal, score, k);
+                            }
+                            if (lose[k] == lose[k + 1]) {
+                                if (usernames[k].compareTo(usernames[k + 1]) > 0) {
+                                    String help = usernames[k];
+                                    usernames[k] = usernames[k + 1];
+                                    usernames[k + 1] = help;
+                                }
                             }
                         }
                     }
@@ -190,9 +177,9 @@ public class Participator {
     public static void transfering(String[] usernames, int[] win, int[] lose, int[] equal, int[] score, int k) {
         transfer(score, k);
         transferUserNames(usernames, k);
-        transfer(win,k);
-        transfer(lose,k);
-        transfer(equal,k);
+        transfer(win, k);
+        transfer(lose, k);
+        transfer(equal, k);
     }
 
     public static void transferUserNames(String[] usernames, int k) {
@@ -203,19 +190,19 @@ public class Participator {
 
     public static void transfer(int[] score, int k) {
         int submission = score[k];
-        score[k] = score[k+1];
-        score[k+1] = submission;
+        score[k] = score[k + 1];
+        score[k + 1] = submission;
     }
 
-    public static void arrangeByScore(ArrayList<Participator> participators){
-        int[] wins = extractWin(participators,1);
-        int[] loses = extractWin(participators,2);
-        int[] equals = extractWin(participators,3);
-        int[] scores = extractWin(participators,4);
+    public static void arrangeByScore(ArrayList<Participator> participators) {
+        int[] wins = extractWin(participators, 1);
+        int[] loses = extractWin(participators, 3);
+        int[] equals = extractWin(participators, 2);
+        int[] scores = extractWin(participators, 4);
         String[] usernames = extractUsernamesList(participators);
-        arrangement(usernames,wins,loses,equals,scores);
-        for (int i =0;i<participators.size();i++){
-            System.out.println(usernames[i]+" "+scores[i]+" "+wins[i]+ " "+equals[i]+" "+loses[i]);
+        arrangement(usernames, wins, loses, equals, scores);
+        for (int i = 0; i < participators.size(); i++) {
+            System.out.println(usernames[i] + " " + scores[i] + " " + wins[i] + " " + equals[i] + " " + loses[i]);
         }
     }
 }

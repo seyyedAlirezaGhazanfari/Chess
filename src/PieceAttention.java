@@ -1,3 +1,3 @@
 public enum  PieceAttention {
-    ALIVE , KILLED ;
+    ALIVE , KILLED
 }
